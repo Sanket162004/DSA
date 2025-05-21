@@ -22,7 +22,7 @@ public:
             int levelSize = q.size(); // Number of nodes in current level
             vector<int> level;
 
-            for (int i = 0; i < levelSize; ++i) {
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode* node = q.front();
                 q.pop();
 
