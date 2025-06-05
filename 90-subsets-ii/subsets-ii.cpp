@@ -1,29 +1,19 @@
 class Solution {
 public:
-    void subsequence(vector<int>& nums,int index,int n,vector<vector<int>>&ans,vector<int>temp){
-        ans.push_back(temp);
-
-        
-        //yes
-        for (int i = index; i < nums.size(); i++) {
-            // Skip duplicates
-            if (i > index && nums[i] == nums[i - 1])
-                continue;
-
-            temp.push_back(nums[i]);
-            subsequence(nums, i + 1, n,ans, temp);
-            temp.pop_back(); // backtrack
+    void solve(int idx, vector<int>& arr, vector<int>& temp, vector<vector<int>>& result) {
+        result.push_back(temp);
+        for (int i = idx; i < arr.size(); i++) {
+            if (i > idx && arr[i] == arr[i - 1]) continue; 
+            temp.push_back(arr[i]);
+            solve(i + 1, arr, temp, result);
+            temp.pop_back(); 
         }
-
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        int n=nums.size();
-        vector<vector<int>>ans;
-        vector<int>temp;
-
-        sort(nums.begin(),nums.end());
-
-        subsequence(nums,0,n,ans,temp);
-        return ans;
+        sort(nums.begin(), nums.end()); 
+        vector<vector<int>> result;
+        vector<int> temp;
+        solve(0, nums, temp, result);
+        return result;
     }
 };
