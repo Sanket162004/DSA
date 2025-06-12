@@ -5,9 +5,12 @@ void solve(int n,vector<int>&temp,unordered_map<int,int>mp,vector<vector<int>>&a
         ans.push_back(temp);
         return;
     }
+    for (auto  it = mp.begin(); it != mp.end(); ++it) {
+    int num = it->first;
+    int &count = it->second;
 
-    for(auto &[num,count]:mp){
-        if(count==0){
+    // same logic...
+    if(count==0){
             continue;
         }
 
@@ -20,17 +23,29 @@ void solve(int n,vector<int>&temp,unordered_map<int,int>mp,vector<vector<int>>&a
         temp.pop_back();
         mp[num]++;
 
-        
+
     }
+ 
+
+    
 }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         int n=nums.size();
 
         unordered_map<int,int>mp;
 
-        for(auto &num:nums){
-            mp[num]++;
-        }
+                    
+
+      for (int i = 0; i < nums.size(); i++) {
+           int num = nums[i];
+
+           if (mp.find(num) != mp.end()) {
+              mp[num] = mp[num] + 1;
+           } else {
+           mp[num] = 1;
+      }
+    }
+
 
         vector<vector<int>>ans;
         vector<int>temp;
@@ -42,3 +57,6 @@ void solve(int n,vector<int>&temp,unordered_map<int,int>mp,vector<vector<int>>&a
         return ans;
     }
 };
+
+
+
