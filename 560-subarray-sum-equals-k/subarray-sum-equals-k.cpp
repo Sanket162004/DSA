@@ -11,17 +11,17 @@ public:
             
             if(mp.find(sum-k)!=mp.end()){
                 count=count+mp[sum-k];
-                mp[sum]++;
+                
                
                
 
             }
-            else{
+           
                 
                 
                 
                 mp[sum]++;
-            }
+            
             
                 
             
