@@ -1,31 +1,36 @@
 class Solution {
 public:
     int minEatingSpeed(vector<int>& nums, int h) {
-        int maxi = 0;
+        int n=nums.size();
 
-        for (int i = 0; i < nums.size(); i++) {
-            maxi = max(maxi, nums[i]);
-        }
+        int l=1;
+        int r=*max_element(nums.begin(),nums.end());
 
-        int l = 1;
-        int r = maxi;
+        while(l<r){
+            int mid=l+(r-l)/2;
 
-        while (l < r) {
-            int mid = l + (r - l) / 2;
+            long long count=0;
 
-            int count = 0;
+            for(int i=0;i<n;i++){
+                int num=nums[i];
+                count=count+num/mid;
 
-            for (int i = 0; i < nums.size(); i++) {
-                count += (nums[i] + mid - 1) / mid;  // ceil(nums[i] / mid)
+                if(num%mid != 0){
+                    count ++;
+                }
+
+                
+
             }
 
-            if (count > h) {
-                l = mid + 1;  // speed too slow, increase
-            } else {
-                r = mid;      // maybe we can slow down more
+            if(count>h){
+                l=mid+1;
+            }
+            else{
+                r=mid;
             }
         }
 
-        return l;  // minimum speed
+        return  r;
     }
 };
