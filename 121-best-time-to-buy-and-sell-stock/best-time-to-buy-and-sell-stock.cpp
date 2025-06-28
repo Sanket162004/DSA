@@ -1,24 +1,20 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& arr) {
+    int maxProfit(vector<int>& nums) {
+        
+        int n=nums.size();
+        int maxprofit=0;
+        int right_max=nums[n-1];
 
-
-        int n=arr.size();
-        if(n==1){
-            return 0;
-        }
-        // tu right se check kartehue aa 
-        int maxright=arr[n-1];
-        int maxprofit=INT_MIN;
         for(int i=n-2;i>=0;i--){
-            int curr=arr[i];
-            maxright=max(maxright,curr);
-            maxprofit=max(maxprofit,maxright-curr);
 
+            if(nums[i]>right_max){
+                right_max=nums[i];
+            }
+
+            maxprofit=max(maxprofit,right_max-nums[i]);
         }
-        
-        return maxprofit;
 
-        
+        return maxprofit;
     }
 };
