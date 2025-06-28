@@ -1,36 +1,32 @@
-#include<bits/stdc++.h>
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         int n=nums.size();
-      
-        
-        unordered_map<int ,int>m;
+
+        unordered_map<int,int>mp;
 
         for(int i=0;i<n;i++){
-            if(m.find(nums[i])!=m.end()){
-                // if we get just increase the cont ;
-                m[nums[i]]++;
-            }
 
-            //aagar nahi mila toh dal do map ke aandar 
+            int num=nums[i];
+
+
+            if(mp.find(num)!=mp.end()){
+                mp[num]++;
+            }
 
             else{
-                m[nums[i]]=1;
+                mp[num]=1;
             }
         }
 
 
+        for(auto it=mp.begin();it!=mp.end();it++){
 
-
-    
-       // and jis ka count sab se jada rahewga usko re turn kar dena ;
-
-       for(auto it:m){
-        if(it.second>n/2){
-            return it.first;
+            if(it->second>n/2){
+                return it->first;
+            }
         }
-       }
-       return -1;
+
+        return -1;
     }
 };
