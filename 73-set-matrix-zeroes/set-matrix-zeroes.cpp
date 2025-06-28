@@ -4,32 +4,42 @@ public:
         int row=matrix.size();
         int col=matrix[0].size();
 
+        // fhele zeron find karega matrix mai
+
         for(int i=0;i<row;i++){
             for(int j=0;j<col;j++){
                 if(matrix[i][j]==0){
-                    // pehle col ko -1 se assign kar dete hai 
+                    //ab jo zero aaya hai uske verticall pure o kar ne hai
+
                     for(int k=0;k<row;k++){
-                        if(matrix[k][j]!=0 && matrix[k][j]!=-999999){
-                            matrix[k][j]=-999999;
+                        if(matrix[k][j]!=0){
+                            matrix[k][j]=999999;
                         }
                     }
-                    // ab row ke pure element zero kar dete 
+
+
+                    // same for horizontal
                     for(int k=0;k<col;k++){
-                        if(matrix[i][k]!=0 && matrix[i][k]!=-9999999){
-                            matrix[i][k]=-999999;
+                        if(matrix[i][k]!=0){
+                            matrix[i][k]=999999;
                         }
                     }
+
                 }
             }
         }
 
+
+        // jaha 999999 hai usko 0 kar duga
+
         for(int i=0;i<row;i++){
             for(int j=0;j<col;j++){
-                if(matrix[i][j]==-999999){
+                if(matrix[i][j]==999999){
                     matrix[i][j]=0;
                 }
             }
         }
-        
+
+            
     }
 };
