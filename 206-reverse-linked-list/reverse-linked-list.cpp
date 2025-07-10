@@ -11,21 +11,35 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode*curr=head;
-        ListNode*prev=NULL;
-        ListNode*future=NULL;
+    stack<int> st;
+    ListNode* temp = head;
+
+    // Step 1: Push values onto the stack
+    while (temp) {
+        st.push(temp->val);
+        temp = temp->next;
+    }
+
+    // ab stack maijo jo new element hai usko dal dene ka ne w linkedlist bana ke
 
 
-        while(curr){
+    ListNode*newlist=new ListNode(-1);
 
-            future=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=future;
+    ListNode*newhead=newlist;
 
-        }
+    ListNode*curr=newhead;
 
-        return prev;
+
+    while(st.empty()==0){
+        curr->next=new ListNode(st.top());
+        st.pop();
+        curr=curr->next;
+    }
+
+    newhead=newhead->next;
+
+    return newhead;
+    
 
     }
 };
