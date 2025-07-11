@@ -1,20 +1,25 @@
 class Solution {
 public:
     void solve(int i, vector<int>& nums, vector<int>& temp, set<vector<int>>& st) {
-        if (i == nums.size()) {
-            vector<int> subset = temp;
-            sort(subset.begin(), subset.end()); // sort to handle unordered duplicates
+
+        if(i>=nums.size()){
+            vector<int>subset=temp;
+            // sort kar lege q ki duplicate nahi lena 
+            sort(subset.begin(),subset.end());
             st.insert(subset);
             return;
+            
+
         }
 
-        // Include nums[i]
         temp.push_back(nums[i]);
-        solve(i + 1, nums, temp, st);
 
-        // Exclude nums[i]
+        solve(i+1,nums,temp,st);
+
         temp.pop_back();
-        solve(i + 1, nums, temp, st);
+
+        solve(i+1,nums,temp,st);
+        
     }
 
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
