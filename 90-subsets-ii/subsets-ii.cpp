@@ -1,39 +1,29 @@
 class Solution {
 public:
-
-    void solve(int index,vector<int>& nums,vector<vector<int>>&ans,vector<int>&temp,int n){
-        if(index>=n){
-            ans.push_back(temp);
-            return ;
+    void solve(int i, vector<int>& nums, vector<int>& temp, set<vector<int>>& st) {
+        if (i == nums.size()) {
+            vector<int> subset = temp;
+            sort(subset.begin(), subset.end()); // sort to handle unordered duplicates
+            st.insert(subset);
+            return;
         }
 
+        // Include nums[i]
+        temp.push_back(nums[i]);
+        solve(i + 1, nums, temp, st);
 
-        // aagar lena hai 
-
-        temp.push_back(nums[index]);
-        solve(index+1,nums,ans,temp,n);
+        // Exclude nums[i]
         temp.pop_back();
-
-        int i=index+1;
-
-        while(i<n && nums[i]==nums[i-1]){
-            i++;
-        }
-
-        solve(i,nums,ans,temp,n);
-
+        solve(i + 1, nums, temp, st);
     }
+
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        int n=nums.size();
+        set<vector<int>> st;
+        vector<int> temp;
+        solve(0, nums, temp, st);
 
-        sort(nums.begin(),nums.end());
-
-        vector<vector<int>>ans;
-        vector<int>temp;
-        int index=0;
-
-        solve(index,nums,ans,temp,n);
-
-        return ans;
+        // Convert set to vector
+        vector<vector<int>> result(st.begin(), st.end());
+        return result;
     }
 };
