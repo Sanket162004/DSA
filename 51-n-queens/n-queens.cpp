@@ -1,5 +1,6 @@
 class Solution {
 private:
+    //  place kar ni ki  condition 2
     bool CanPlace(int row,int col,vector<string>board,int n){
         int tr=row,tc=col;
         while(row>=0 && col>=0) if(board[row--][col--]=='Q') return false;
