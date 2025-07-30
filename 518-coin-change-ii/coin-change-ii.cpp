@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int solve(vector<int>& coins,int amount ,int i,vector<vector<int>>&dp){
+int dp[300][5001];
+    int solve(vector<int>& coins,int amount ,int i){
         if(i==coins.size()){
             return 0;
         }
@@ -15,17 +16,18 @@ public:
             return dp[i][amount];
         }
 
-        int take=solve(coins,amount-coins[i],i,dp);
+        int take=solve(coins,amount-coins[i],i);
 
-        int dont_take=solve(coins,amount,i+1,dp);
+        int dont_take=solve(coins,amount,i+1);
 
         return dp[i][amount]=take+dont_take;
     }
     int change(int amount, vector<int>& coins) {
         int n=coins.size();
         int i=0;
-        vector<vector<int>>dp(n,vector<int>(amount+1,-1));
-        return solve(coins,amount,0,dp);
+        memset(dp,-1,sizeof(dp));
+      
+        return solve(coins,amount,0);
 
     }
 };
