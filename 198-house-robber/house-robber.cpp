@@ -1,26 +1,31 @@
 class Solution {
 public:
-    int t[101];
-    int solve(vector<int>& nums,int i,int n){
-         if(i>=n){
-            return 0;
-         }
-         if(t[i]!=-1){
-            return t[i];
-         }
-
-         int steal=nums[i]+solve(nums,i+2,n);
-
-         int skip=solve(nums,i+1,n);
-
-         return t[i]=max(steal,skip);
+   int solve(int i,vector<int>& nums,vector<int>&dp){
+        
+    if(i==0){
+        return nums[i];
     }
+
+    if(i<0){
+        return 0;
+    }
+
+    if(dp[i]!=-1){
+        return dp[i];
+    }
+    
+    int pick=nums[i]+solve(i-2,nums,dp);
+
+    int dontpick=0+solve(i-1,nums,dp);
+
+    return dp[i]=max(pick,dontpick);
+
+
+   }
     int rob(vector<int>& nums) {
         int n=nums.size();
-
-        memset(t,-1,sizeof(t));
-        return solve(nums,0,n);
-        
-        
+        int i=n-1;
+        vector<int>dp(n+1,-1);
+        return solve(i,nums,dp);
     }
 };
