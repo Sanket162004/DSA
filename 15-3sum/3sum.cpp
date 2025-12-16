@@ -1,57 +1,37 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
         int n=nums.size();
-
         vector<vector<int>>ans;
 
-        sort(nums.begin(),nums.end());
-
-        for(int k=0;k<n-2;k++){
-            if(k>0 && nums[k]==nums[k-1]){
+        for(int i=0;i<n-2;i++){
+            if(i!=0 && nums[i]==nums[i-1]){
                 continue;
             }
 
-            int i=k+1;
-            int j=n-1;
+            int target=-nums[i];
 
-            int sum=0;
-
-            while(i<j){
-                sum=nums[k]+nums[i]+nums[j];
-
-                // tin condition sum ==0
-                // sum >0
-                //sum<0;
-
-                if(sum==0){
-                    ans.push_back({nums[k],nums[i],nums[j]});
-                    // skip wali condition q ki aapne i j equal nahi rahe sake
-
-                    while(i<j&& nums[j]==nums[j-1]){
-                        j--;
-                    }
-                    while(i<j&&nums[i]==nums[i+1]){
-                        i++;
-                    }
-
-                    // ans mil gaya further check karege ki answer mil ra kya 
-
-                    i++;
-                    j--;
+            int low=i+1;
+            int high=n-1;
+          
+            while(low<high){
+                if(nums[low]+nums[high]==target){
+                    
+                    ans.push_back({nums[i],nums[low],nums[high]});
+                    while (low < high && nums[low] == nums[low + 1]) low++;
+                    while (low < high && nums[high] == nums[high - 1]) high--;
+                    low++;
+                    high--;
                 }
-
-               else if(sum>0){
-                    j--;
+                else if(nums[low]+nums[high]>target){
+                    high--;
                 }
                 else{
-                    i++;
+                    low++;
                 }
             }
         }
-
         return ans;
-
-        
     }
 };
